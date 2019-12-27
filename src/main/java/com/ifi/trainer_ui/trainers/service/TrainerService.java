@@ -10,4 +10,7 @@ public interface TrainerService {
     Trainer getTrainer(String name);
 
     List<Trainer> listOtherTrainers(String name);
+
+    //TODO récupérer la liste des pokemons du Trainer
+
 }

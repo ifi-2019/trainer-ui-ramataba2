@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
@@ -30,20 +31,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+    @Override
     public UserDetailsService userDetailsService() {
-       /* return username -> Optional.of(trainerService.listTrainers().stream().filter(trainer -> trainer.getName().equals()))
-                .map(trainers -> trainers,(trainer -> User.withUsername(trainer.getName()).password(trainer.getPassword()).roles("USER").build()))
-                .orElseThrow(() -> new BadCredentialsException("No such user"));*/
-        return  new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-                Trainer user = trainerService.getTrainer(s);
-                if(user == null){
-                    throw  new BadCredentialsException("No such user");
-                }
-                return User.withUsername(user.getName()).password(user.getPassword()).roles("USER").build();
+        return s -> {
+            Trainer user = trainerService.getTrainer(s);
+            if(user == null){
+                throw  new BadCredentialsException("No such user");
             }
+            return User.withUsername(user.getName()).password(user.getPassword()).roles("USER").build();
         };
+    }
+
+  @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests().antMatchers("/", "/registerTrainer", "/images/**").permitAll()
+                .antMatchers("/pokedex").authenticated()
+                .and().formLogin().permitAll()
+        .and().logout().permitAll();
     }
 
     public void setTrainerService(TrainerService trainerService) {

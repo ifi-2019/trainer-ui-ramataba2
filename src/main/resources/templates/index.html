@@ -24,6 +24,7 @@
                 <small id="trainerHelp" class="form-text text-muted">This will be your name in the game !</small>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
+            <input type="hidden" name="{{_csrf.parameterName}}" value="{{_csrf.token}}"/>
         </form>
     </div>
 

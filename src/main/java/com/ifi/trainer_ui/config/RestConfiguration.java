@@ -20,7 +20,7 @@ public class RestConfiguration {
         BasicAuthenticationInterceptor interceptor = new BasicAuthenticationInterceptor(user, password);
         RestTemplate template = restTemplate();
         template.setInterceptors(Collections.singletonList(interceptor));
-        return restTemplate();
+        return template;
     }
 
     @Bean
