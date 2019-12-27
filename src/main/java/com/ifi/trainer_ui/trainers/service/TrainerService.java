@@ -11,6 +11,6 @@ public interface TrainerService {
 
     List<Trainer> listOtherTrainers(String name);
 
-    //TODO récupérer la liste des pokemons du Trainer
+    //List<PokemonType> getTrainerTeam(String name);
 
 }

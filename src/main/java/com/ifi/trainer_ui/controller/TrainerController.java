@@ -20,7 +20,10 @@ public class TrainerController {
 
     @GetMapping("/trainers")
     public ModelAndView trainers(){
-        List<Trainer> trainers = trainerService.listTrainers();
+       // List<Trainer> trainers = trainerService.listTrainers();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Principal principal = (Principal) auth.getPrincipal();
+        List<Trainer> trainers = trainerService.listOtherTrainers(principal.getName());
 
         if(trainers == null){
             trainers = new ArrayList<>();
@@ -34,12 +37,10 @@ public class TrainerController {
     public ModelAndView profile(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Principal principal = (Principal) auth.getPrincipal();
-        List<Trainer> trainers = trainerService.listOtherTrainers(principal.getName());
-        if(trainers == null){
-            trainers = new ArrayList<>();
-        }
+        Trainer trainer = trainerService.getTrainer(principal.getName());
+
         var modelAndView = new ModelAndView("profile");
-        modelAndView.addObject("profile", trainers);
+        modelAndView.addObject("profile", trainer);
         return modelAndView;
     }
 

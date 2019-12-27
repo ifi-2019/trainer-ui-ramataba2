@@ -1,6 +1,6 @@
 package com.ifi.trainer_ui.trainers.bo;
 
-//@Embeddable
+
 public class Pokemon {
     private int pokemonType;
 

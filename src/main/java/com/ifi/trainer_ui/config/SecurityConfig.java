@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/", "/registerTrainer", "/images/**").permitAll()
-                .antMatchers("/pokedex").authenticated()
+                .antMatchers("/pokedex", "trainers", "profile").authenticated()
                 .and().formLogin().permitAll()
         .and().logout().permitAll();
     }

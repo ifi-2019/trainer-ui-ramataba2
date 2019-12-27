@@ -1,0 +1,30 @@
+{{> layout/header}}
+
+
+<body>
+{{> layout/navbar}}
+<div class="container">
+    <h1>All other trainers</h1>
+    <div>
+        {{#trainers}}
+        <div>
+            <h3>{{name}}</h3>
+            <div>Team :
+                <div>
+                    {{#team}}
+                    <div>
+                        Level : {{level}}
+                    </div>
+                    <div>
+                        Id du pokemon : {{pokemonType}}
+                    </div>
+                    {{/team}}
+                </div>
+            </div>
+        </div>
+        {{/trainers}}
+    </div>
+</div>
+
+</body>
+</html>

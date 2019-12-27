@@ -2,15 +2,11 @@ package com.ifi.trainer_ui.trainers.bo;
 
 import java.util.List;
 
-//@Entity
 public class Trainer {
 
-    //      @Id
     private String name;
-    //    @ElementCollection
     private List<Pokemon> team;
 
-    //@Column
     private String password;
 
 

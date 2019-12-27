@@ -1,0 +1,17 @@
+{{> layout/header}}
+
+
+<body>
+{{> layout/navbar}}
+
+<h1>{{trainer.name}}</h1>
+<div>{{#trainer.team}}
+    <div>
+        <div>Level : {{level}}</div>
+        <div>Id du pokemon : {{pokemonType}}</div>
+    </div>
+    {{/trainer.team}}
+</div>
+
+</body>
+</html>
